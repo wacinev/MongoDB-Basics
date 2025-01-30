@@ -1,0 +1,60 @@
+const express = require("express");
+const uuid = require("uuid").v4;
+
+const router = express.Router();
+
+const musicians = [
+    {
+      id: uuid(),
+      name: "KAYTRANADA",
+      age: 30,
+    },
+    {
+      id: uuid(),
+      name: "Kenny Beats",
+      age: 31,
+    },
+    {
+      id: uuid(),
+      name: "Tyler the Creator",
+      age: 31,
+    },
+    {
+      id: uuid(),
+      name: "Denzel Curry",
+      age: 27,
+    },
+  ];
+
+router.get('/', (req, res) => {
+    
+  res.status(200).json({message: "success", payload: musicians});
+})
+
+router.post('/', (req, res) => {
+  const newMusician = {
+    name: req.body.name,
+    age: req.body.age,
+    id: uuid()
+  }
+
+  //Object.assign(newMusician, req.body)
+  
+  musicians.push(newMusician);
+  res.status(200).json(newMusician);
+})
+
+router.patch('/musicians/:id', (req, res) => {
+  const foundMusician = musicians.find((musician) => musician.id === req.params.id)
+  Object.assign(foundMusician, req.body)
+  res.status(200).json(foundMusician);
+})
+
+router.delete('/:id', (req, res) => {
+  const i = musicians.findIndex((musician) => musician.id === req.params.id);
+  const deletedMusician = musicians.splice(i,1)[0];
+  res.status(200).json(deletedMusician);
+})
+
+
+module.exports = router;  

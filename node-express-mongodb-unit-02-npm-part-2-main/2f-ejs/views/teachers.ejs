@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/navbar') %>    
+        <% if (isLoggedIn) { %>
+            <h2>Hey, <%= name %>! </h2>
+        <% } else { %>    
+            <button>Login</button>
+        <% } %>
+
+        <% for (const teacher of teachers) { %>
+            <% if (teacher.leadingClass) { %>
+            <div class="teachCard blueBackground">
+            <% } else {%>
+            <div class="teachCard redBackground">
+            <% } %>
+                <h3><%= teacher.name %></h3>
+                <p>Origin: <%= teacher.origin %></p>
+                <p>Age: <%= teacher.age %></p>
+            </div>
+            <% } %>
+    </body>
+</html>

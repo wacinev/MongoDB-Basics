@@ -1,0 +1,54 @@
+const express = require("express");
+const uuid = require("uuid").v4;
+
+const router = express.Router();
+
+const actors = [
+    {
+      id: uuid(),
+      name: "Jonah Hill",
+      age: 38,
+    },
+    {
+      id: uuid(),
+      name: "Leonardo DiCaprio",
+      age: 48,
+    },
+    {
+      id: uuid(),
+      name: "Finn Wolfhard",
+      age: 19,
+    },
+    {
+      id: uuid(),
+      name: "Samuel L Jackson",
+      age: 73,
+    },
+  ];
+
+router.get('/', (req, res) => {
+    
+    res.status(200).json({message: "success", payload: actors});
+})
+  
+router.post('/', (req, res) => {
+    const {name, age, id} = req.body;
+    
+    actors.push({name, age, id});
+  
+    res.status(200).json({message: "succes", payload: actors});
+});
+
+router.patch('/', (req, res) => {
+
+})
+
+router.delete('/', (req, res) => {
+    const {name} = req.body;
+
+    actors.splice
+
+    res.status(200).json({message: "succes", payload: `Goodbye, ${name}`});
+})
+
+module.exports = router;  
